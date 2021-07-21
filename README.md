@@ -9,12 +9,20 @@ Other useful resources, like documentation, [here](https://www.gnu.org/software/
 
 ## How ?
 Every frame of the video `Bad Apple !!` is saved as a text file in which if the pixel is white, a ` ` is written and if it is black, a `#` is written.
-The C file in this repository can be used to generate these frames.
 
 GRUB will simply show the content of each file one by one using the `cat` command quickly enough to give the illusion of motion. I added the script in a `menuentry` for clarity.
 
+## Can I reproduce it ?
+You can, of course ! The framerate will differ but here are the steps to follow :
+- Download video (using [youtube-dl](https://github.com/ytdl-org/youtube-dl/) for example)
+- Update values and build the `getframe.c` program
+- Run the `getframe` program (you can check the result using the `display.sh` script)
+- Add the `grub.cfg` content to your `grub.cfg` and move the frames where GRUB is installed
+
 ## Why is it challenging ?
 The main problem with the scripting language of GRUB is ... the lack of support of arithmetic. So I had to make it possible without additions, which can be useful for doing a loop, for example. The solution I came up with is using `variable expansion`. We have around 5000 files, all named after their frame number so we will have 4 variables each representing a power of 10. The concatenation of each variable can be used to show a specific frame.
+
+Due to the way I/O work in GRUB, the time to run the script isn't deterministic and the framerate is far from constant.
 
 ## What did you change for the video ?
 First of all, I added the music [Bad Apple !!](https://www.youtube.com/watch?v=FtutLA63Cp8) on top of my record as this script does not include sound.

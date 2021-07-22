@@ -28,6 +28,9 @@ Due to the way I/O work in GRUB, the time to run the script isn't deterministic 
 First of all, I added the music [Bad Apple !!](https://www.youtube.com/watch?v=FtutLA63Cp8) on top of my record as this script does not include sound.
 I also only showed the frames ending with the numbers 0, 3 and 7 to have a timing similar to the real one (I only had to put the recorded file at 95% to have a result similar to the first video).
 
+## We can see errors at the end of the video
+Yup, I made the loop to read 6000 files but there are less so GRUB can't find about 500 of them. One could add an if statement to end the script when all the variables are equal to the right values but I'm afraid it would slow down the script (and who cares ?? it's a POC :p).
+
 ## Can we add sound ?
 It is technically possible to add sound between two frames but as each task is done sequentially, one would have to reduce the number of frames to keep a correct framerate as sound in GRUB takes some time. The way of generating the config file would also not be the same, the best answer I can come up with is not using `variable expansion` and instead programmatically generate a big configuration file with each filename and sound (in the GRUB format).
 
